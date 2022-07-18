@@ -2,6 +2,7 @@ const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const { response } = require('express');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const db = require('./db/db.json');
@@ -37,8 +38,9 @@ app.get('/api/notes', (req, res) => {
     res.json(userNotes);
 });
 
+// receive new note from user, add unique ID, and add to note list
 app.post('/api/notes', (req, res) => {
-    req.body.id = 1; //insert note ID function here
+    req.body.id = uuidv4();
     const data = req.body;
     addNote(data);
 });
