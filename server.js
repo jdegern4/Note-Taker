@@ -45,6 +45,13 @@ app.post('/api/notes', (req, res) => {
     addNote(data);
 });
 
+app.delete('/api/notes/:id', (req, res) => {
+    const noteID = req.params.id;
+    userNotes = userNotes.filter((userNotes) => userNotes.id != noteID);
+    console.log("Delete command activated");
+    res.send(`Note with ID ${noteID} deleted.`);
+});
+
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });
